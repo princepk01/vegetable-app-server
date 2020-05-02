@@ -74,7 +74,7 @@ public class AddressController extends BaseController{
 			List<AddressModel> addressModelList = JpaToModelConvertor.getModelListAddressObject(addressList);
 			responseMessage.setData(addressModelList);
 		}
-		responseMessage.setStatus(true);
+		responseMessage.setStatus(true);      
 		return sendResponse(responseMessage);
 	}
 	
