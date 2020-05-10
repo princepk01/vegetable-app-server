@@ -1,38 +1,15 @@
-package com.app.vegetable.jpa;
+package com.app.vegetable.model;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+public class ProductItemImageModel {
 
-@Entity
-@Table(name = "PRODUCT_ITEM_IMAGE")
-public class ProductItemImage {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
 	private int id;
-//	@Column(name = "ITEM_IMAGE")
-//	@Lob
 //	private byte[] itemImage;
-//	@Column(name = "ITEM_IMAGE_FILE_NAME")
 //	private String itemImageFileName;
-	@Column(name = "ITEM_IMAGE_FILE_URL", columnDefinition = "LONGTEXT")
 	private String itemInageFileUrl;
-	@Column(name = "CREATED_DATE")
 	private Timestamp createdDate;
-	@Column(name = "MODIFIED_DATE")
 	private Timestamp modifiedDate;
-	@ManyToOne
-	@JoinColumn(name = "product_item_id")
-	private ProductItem productItem;
 
 	public int getId() {
 		return id;
@@ -80,14 +57,6 @@ public class ProductItemImage {
 
 	public void setModifiedDate(Timestamp modifiedDate) {
 		this.modifiedDate = modifiedDate;
-	}
-
-	public ProductItem getProductItem() {
-		return productItem;
-	}
-
-	public void setProductItem(ProductItem productItem) {
-		this.productItem = productItem;
 	}
 
 }

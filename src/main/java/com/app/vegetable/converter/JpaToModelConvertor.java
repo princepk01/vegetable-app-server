@@ -4,8 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.app.vegetable.jpa.Address;
+import com.app.vegetable.jpa.Product;
+import com.app.vegetable.jpa.ProductItem;
+import com.app.vegetable.jpa.ProductItemDetails;
+import com.app.vegetable.jpa.ProductItemImage;
 import com.app.vegetable.jpa.User;
 import com.app.vegetable.model.AddressModel;
+import com.app.vegetable.model.ProductItemDetailsModel;
+import com.app.vegetable.model.ProductItemImageModel;
+import com.app.vegetable.model.ProductItemModel;
+import com.app.vegetable.model.ProductModel;
 import com.app.vegetable.model.UserModel;
 
 public class JpaToModelConvertor {
@@ -69,9 +77,95 @@ public class JpaToModelConvertor {
 		return addressModelList;
 	}
 
-	public static AddressModel getModelObject(List<Address> addressList) {
-		
-		return null;
+	public static ProductModel getModelObject(Product product) {
+		ProductModel productModel = null;
+		if (product != null) {
+			productModel = new ProductModel();
+
+			productModel.setId(product.getId());
+			productModel.setProductName(product.getProductName());
+//			productModel.setProductImage(product.getProductImage());
+//			productModel.setProductImageFileName(product.getProductImageFileName());
+			productModel.setProductImageUrl(product.getProductImageUrl());
+		}
+		return productModel;
+	}
+
+	public static List<ProductModel> getProductModelListObject(List<Product> productList) {
+		List<ProductModel> productModelList = null;
+		if (productList != null && !productList.isEmpty()) {
+			productModelList = new ArrayList<ProductModel>();
+			for (Product product : productList) {
+				productModelList.add(getModelObject(product));
+			}
+		}
+		return productModelList;
+	}
+
+	public static ProductItemModel getModelObject(ProductItem productItem) {
+		ProductItemModel productItemModel = null;
+		if (productItem != null) {
+
+			productItemModel = new ProductItemModel();
+
+			productItemModel.setId(productItem.getId());
+			productItemModel.setItemName(productItem.getItemName());
+			productItemModel.setTotalQuantity(productItem.getTotalQuantity());
+			productItemModel.setTotalPrice(productItem.getTotalPrice());
+			productItemModel.setItemMrp(productItem.getItemMrp());
+			productItemModel.setDiscountPrice(productItem.getDiscountPrice());
+			productItemModel.setRemainingQuantity(productItem.getRemainingQuantity());
+			productItemModel.setTotalSellQuantity(productItem.getTotalSellQuantity());
+			if(productItem.getProduct() != null) {
+				productItemModel.setProductId(productItem.getProduct().getId());
+			}
+			List<ProductItemImage> productItemImageList = productItem.getProductItemImageList();
+			if (productItemImageList != null && !productItemImageList.isEmpty()) {
+				ProductItemImageModel productItemImageModel = new ProductItemImageModel();
+				for (ProductItemImage productItemImage : productItemImageList) {
+					productItemImageModel.setId(productItemImage.getId());
+					productItemImageModel.setItemInageFileUrl(productItemImage.getItemInageFileUrl());
+				}
+				productItemModel.setProductItemImageModel(productItemImageModel);
+			}
+
+			List<ProductItemDetails> productItemDetailsList = productItem.getProductItemDetailsList();
+			if (productItemDetailsList != null && !productItemDetailsList.isEmpty()) {
+
+				for (ProductItemDetails productItemDetails : productItemDetailsList) {
+					productItemModel.setProductItemDetailsModel(getProductItemDetailsModelObject(productItemDetails));
+
+				}
+			}
+		}
+		return productItemModel;
+	}
+
+	public static ProductItemDetailsModel getProductItemDetailsModelObject(ProductItemDetails productItemDetails) {
+		ProductItemDetailsModel productItemDetailsModel = null;
+		if (productItemDetails != null) {
+			productItemDetailsModel = new ProductItemDetailsModel();
+			productItemDetailsModel.setId(productItemDetails.getId());
+			productItemDetailsModel.setNutrientValueAndLife(productItemDetails.getNutrientValueAndLife());
+			productItemDetailsModel.setShelfLife(productItemDetails.getShelfLife());
+			productItemDetailsModel.setStroageTips(productItemDetails.getStroageTips());
+			productItemDetailsModel.setUnit(productItemDetails.getUnit());
+			productItemDetailsModel.setSeller(productItemDetails.getSeller());
+			productItemDetailsModel.setDescription(productItemDetails.getDescription());
+			productItemDetailsModel.setDisclaimer(productItemDetails.getDisclaimer());
+		}
+		return productItemDetailsModel;
+	}
+
+	public static List<ProductItemModel> getProductItemModelListObject(List<ProductItem> productItemList) {
+		List<ProductItemModel> productItemModelList = null;
+		if (productItemList != null && !productItemList.isEmpty()) {
+			productItemModelList = new ArrayList<ProductItemModel>();
+			for (ProductItem productItem : productItemList) {
+				productItemModelList.add(getModelObject(productItem));
+			}
+		}
+		return productItemModelList;
 	}
 
 }

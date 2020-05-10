@@ -24,6 +24,8 @@ public class Product {
 	private int id;
 	@Column(name = "PRODUCT_NAME")
 	private String productName;
+	@Column(name = "PRODUCT_IMAGE_URL", columnDefinition = "LONGTEXT")
+	private String productImageUrl;
 	@Column(name = "CREATED_DATE")
 	private Timestamp createdDate;
 	@Column(name = "MODIFIED_DATE")
@@ -48,8 +50,32 @@ public class Product {
 		this.productName = productName;
 	}
 
+//	public byte[] getProductImage() {
+//		return productImage;
+//	}
+//
+//	public void setProductImage(byte[] productImage) {
+//		this.productImage = productImage;
+//	}
+//
+//	public String getProductImageFileName() {
+//		return productImageFileName;
+//	}
+//
+//	public void setProductImageFileName(String productImageFileName) {
+//		this.productImageFileName = productImageFileName;
+//	}
+
 	public Timestamp getCreatedDate() {
 		return createdDate;
+	}
+
+	public String getProductImageUrl() {
+		return productImageUrl;
+	}
+
+	public void setProductImageUrl(String productImageUrl) {
+		this.productImageUrl = productImageUrl;
 	}
 
 	public void setCreatedDate(Timestamp createdDate) {
