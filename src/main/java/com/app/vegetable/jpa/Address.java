@@ -1,14 +1,18 @@
 package com.app.vegetable.jpa;
 
 import java.sql.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -38,6 +42,9 @@ public class Address {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+
+	@OneToMany(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<PlacedOrder> placedOrderList;
 
 	public int getId() {
 		return id;
@@ -117,6 +124,14 @@ public class Address {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<PlacedOrder> getPlacedOrderList() {
+		return placedOrderList;
+	}
+
+	public void setPlacedOrderList(List<PlacedOrder> placedOrderList) {
+		this.placedOrderList = placedOrderList;
 	}
 
 }

@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.app.vegetable.jpa.Address;
+import com.app.vegetable.jpa.CartItem;
 import com.app.vegetable.jpa.Product;
 import com.app.vegetable.jpa.ProductItem;
 import com.app.vegetable.jpa.ProductItemDetails;
 import com.app.vegetable.jpa.ProductItemImage;
 import com.app.vegetable.jpa.User;
 import com.app.vegetable.model.AddressModel;
+import com.app.vegetable.model.CartItemModel;
 import com.app.vegetable.model.ProductItemDetailsModel;
 import com.app.vegetable.model.ProductItemImageModel;
 import com.app.vegetable.model.ProductItemModel;
@@ -116,17 +118,16 @@ public class JpaToModelConvertor {
 			productItemModel.setDiscountPrice(productItem.getDiscountPrice());
 			productItemModel.setRemainingQuantity(productItem.getRemainingQuantity());
 			productItemModel.setTotalSellQuantity(productItem.getTotalSellQuantity());
-			if(productItem.getProduct() != null) {
+			if (productItem.getProduct() != null) {
 				productItemModel.setProductId(productItem.getProduct().getId());
 			}
 			List<ProductItemImage> productItemImageList = productItem.getProductItemImageList();
 			if (productItemImageList != null && !productItemImageList.isEmpty()) {
-				ProductItemImageModel productItemImageModel = new ProductItemImageModel();
+				// ProductItemImageModel productItemImageModel = new ProductItemImageModel();
 				for (ProductItemImage productItemImage : productItemImageList) {
-					productItemImageModel.setId(productItemImage.getId());
-					productItemImageModel.setItemInageFileUrl(productItemImage.getItemInageFileUrl());
+
+					productItemModel.setProductItemImageModel(getProductItemImageModel(productItemImage));
 				}
-				productItemModel.setProductItemImageModel(productItemImageModel);
 			}
 
 			List<ProductItemDetails> productItemDetailsList = productItem.getProductItemDetailsList();
@@ -139,6 +140,15 @@ public class JpaToModelConvertor {
 			}
 		}
 		return productItemModel;
+	}
+
+	public static ProductItemImageModel getProductItemImageModel(ProductItemImage productItemImage) {
+		ProductItemImageModel productItemImageModel = new ProductItemImageModel();
+		if (productItemImage != null) {
+			productItemImageModel.setId(productItemImage.getId());
+			productItemImageModel.setItemInageFileUrl(productItemImage.getItemInageFileUrl());
+		}
+		return productItemImageModel;
 	}
 
 	public static ProductItemDetailsModel getProductItemDetailsModelObject(ProductItemDetails productItemDetails) {
@@ -166,6 +176,108 @@ public class JpaToModelConvertor {
 			}
 		}
 		return productItemModelList;
+	}
+
+	public static int calculateItemCountAmount(int discountPrice, int itemCount) {
+		int totalCalculateAmount = 0;
+		switch (itemCount) {
+		case 1:
+			totalCalculateAmount = discountPrice * itemCount;
+			break;
+		case 2:
+			totalCalculateAmount = discountPrice * itemCount;
+			break;
+		case 3:
+			totalCalculateAmount = discountPrice * itemCount;
+			break;
+
+		}
+		return totalCalculateAmount;
+	}
+
+	public static int calculateItemCountMrpAmount(int itemMrp, int itemCount) {
+		int totalCountItemMrpAmount = 0;
+		switch (itemCount) {
+		case 1:
+			totalCountItemMrpAmount = itemMrp * itemCount;
+			break;
+		case 2:
+			totalCountItemMrpAmount = itemMrp * itemCount;
+			break;
+		case 3:
+			totalCountItemMrpAmount = itemMrp * itemCount;
+			break;
+
+		}
+		return totalCountItemMrpAmount;
+	}
+
+	public static CartItemModel getModelObject(CartItem cartItem) {
+		CartItemModel cartItemModel = null;
+		if (cartItem != null) {
+			cartItemModel = new CartItemModel();
+
+			cartItemModel.setId(cartItem.getId());
+			cartItemModel.setItemCount(cartItem.getItemCount());
+
+			User user = cartItem.getUser();
+			if (user != null) {
+				cartItemModel.setUserId(user.getId());
+			}
+
+			ProductItem productItem = cartItem.getProductItem();
+			if (productItem != null) {
+				cartItemModel.setProductItemModel(getProductItemModel(productItem));
+			}
+
+			int itemCount = cartItem.getItemCount();
+			cartItemModel.setItemCount(itemCount);
+			cartItemModel.setTotalItemCountDiscountPrice(
+					calculateItemCountAmount(cartItemModel.getProductItemModel().getDiscountPrice(), itemCount));
+
+			cartItemModel.setTotalItemCountMrpAmount(
+					calculateItemCountMrpAmount(cartItemModel.getProductItemModel().getItemMrp(), itemCount));
+
+			ProductItemDetails productItemDetails = cartItem.getProductItemDetails();
+			if (productItemDetails != null) {
+				cartItemModel.setProductItemDetailsModel(getProductItemDetailsModelObject(productItemDetails));
+			}
+
+			ProductItemImage productItemImage = cartItem.getProductItemImage();
+			if (productItemImage != null) {
+				cartItemModel.setProductItemImageModel(getProductItemImageModel(productItemImage));
+			}
+		}
+		return cartItemModel;
+	}
+
+	public static ProductItemModel getProductItemModel(ProductItem productItem) {
+		ProductItemModel productItemModel = null;
+		if (productItem != null) {
+
+			productItemModel = new ProductItemModel();
+
+			productItemModel.setId(productItem.getId());
+			productItemModel.setItemName(productItem.getItemName());
+			productItemModel.setTotalQuantity(productItem.getTotalQuantity());
+			productItemModel.setTotalPrice(productItem.getTotalPrice());
+			productItemModel.setItemMrp(productItem.getItemMrp());
+			productItemModel.setDiscountPrice(productItem.getDiscountPrice());
+			productItemModel.setRemainingQuantity(productItem.getRemainingQuantity());
+			productItemModel.setTotalSellQuantity(productItem.getTotalSellQuantity());
+		}
+		return productItemModel;
+	}
+
+	public static List<CartItemModel> getCartItemModelListObject(List<CartItem> cartItemList) {
+		List<CartItemModel> cartItemModelList = null;
+		if (cartItemList != null && !cartItemList.isEmpty()) {
+			cartItemModelList = new ArrayList<CartItemModel>();
+			for (CartItem cartItem : cartItemList) {
+				cartItemModelList.add(getModelObject(cartItem));
+			}
+		}
+		return cartItemModelList;
 	}
 
 }

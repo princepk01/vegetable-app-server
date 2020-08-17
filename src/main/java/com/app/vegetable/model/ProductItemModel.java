@@ -5,13 +5,13 @@ public class ProductItemModel {
 	private int id;
 	private int productId;
 	private String itemName;
-	private String totalQuantity;
-	private String totalPrice;
-	private String itemMrp;
-	private String discountPrice;
-	private String remainingQuantity;
-	private String totalSellQuantity;
-	private String quantitySellAmount;
+	private int totalQuantity;
+	private int totalPrice;
+	private int itemMrp;
+	private int discountPrice;
+	private int remainingQuantity;
+	private int totalSellQuantity;
+	private int quantitySellAmount;
 	private ProductItemDetailsModel productItemDetailsModel;
 	private ProductItemImageModel productItemImageModel;
 
@@ -31,59 +31,59 @@ public class ProductItemModel {
 		this.itemName = itemName;
 	}
 
-	public String getTotalQuantity() {
+	public int getTotalQuantity() {
 		return totalQuantity;
 	}
 
-	public void setTotalQuantity(String totalQuantity) {
+	public void setTotalQuantity(int totalQuantity) {
 		this.totalQuantity = totalQuantity;
 	}
 
-	public String getTotalPrice() {
+	public int getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(String totalPrice) {
+	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
-	public String getItemMrp() {
+	public int getItemMrp() {
 		return itemMrp;
 	}
 
-	public void setItemMrp(String itemMrp) {
+	public void setItemMrp(int itemMrp) {
 		this.itemMrp = itemMrp;
 	}
 
-	public String getDiscountPrice() {
+	public int getDiscountPrice() {
 		return discountPrice;
 	}
 
-	public void setDiscountPrice(String discountPrice) {
+	public void setDiscountPrice(int discountPrice) {
 		this.discountPrice = discountPrice;
 	}
 
-	public String getRemainingQuantity() {
+	public int getRemainingQuantity() {
 		return remainingQuantity;
 	}
 
-	public void setRemainingQuantity(String remainingQuantity) {
+	public void setRemainingQuantity(int remainingQuantity) {
 		this.remainingQuantity = remainingQuantity;
 	}
 
-	public String getTotalSellQuantity() {
+	public int getTotalSellQuantity() {
 		return totalSellQuantity;
 	}
 
-	public void setTotalSellQuantity(String totalSellQuantity) {
+	public void setTotalSellQuantity(int totalSellQuantity) {
 		this.totalSellQuantity = totalSellQuantity;
 	}
 
-	public String getQuantitySellAmount() {
+	public int getQuantitySellAmount() {
 		return quantitySellAmount;
 	}
 
-	public void setQuantitySellAmount(String quantitySellAmount) {
+	public void setQuantitySellAmount(int quantitySellAmount) {
 		this.quantitySellAmount = quantitySellAmount;
 	}
 

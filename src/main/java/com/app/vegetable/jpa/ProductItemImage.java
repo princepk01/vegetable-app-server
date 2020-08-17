@@ -1,14 +1,18 @@
 package com.app.vegetable.jpa;
 
 import java.sql.Timestamp;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,10 +34,13 @@ public class ProductItemImage {
 	private Timestamp createdDate;
 	@Column(name = "MODIFIED_DATE")
 	private Timestamp modifiedDate;
+	
 	@ManyToOne
 	@JoinColumn(name = "product_item_id")
 	private ProductItem productItem;
 
+	@OneToMany(mappedBy = "productItemImage", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<CartItem> cartItemList;
 	public int getId() {
 		return id;
 	}

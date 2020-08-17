@@ -27,19 +27,19 @@ public class ProductItem {
 	@Column(name = "ITEM_NAME")
 	private String itemName;
 	@Column(name = "TOTAL_QUANTITY")
-	private String totalQuantity;
+	private int totalQuantity;
 	@Column(name = "TOTAL_PRICE")
-	private String totalPrice;
+	private int totalPrice;
 	@Column(name = "ITEM_MRP")
-	private String itemMrp;
+	private int itemMrp;
 	@Column(name = "DISCOUNT_PRICE")
-	private String discountPrice;
+	private int discountPrice;
 	@Column(name = "REMAINING_QUANTITY")
-	private String remainingQuantity;
+	private int remainingQuantity;
 	@Column(name = "TOTAL_SELL_QUANTITY")
-	private String totalSellQuantity;
+	private int totalSellQuantity;
 	@Column(name = "QUANTITY_SELL_AMOUNT")
-	private String quantitySellAmount;
+	private int quantitySellAmount;
 	@Column(name = "CREATED_DATE")
 	private Timestamp createdDate;
 	@Column(name = "MODIFIED_DATE")
@@ -54,6 +54,8 @@ public class ProductItem {
 	@OneToMany(mappedBy = "productItem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<ProductItemDetails> productItemDetailsList;
 
+	@OneToMany(mappedBy = "productItem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<CartItem> cartItemList; 
 	public int getId() {
 		return id;
 	}
@@ -70,59 +72,59 @@ public class ProductItem {
 		this.itemName = itemName;
 	}
 
-	public String getTotalQuantity() {
+	public int getTotalQuantity() {
 		return totalQuantity;
 	}
 
-	public void setTotalQuantity(String totalQuantity) {
+	public void setTotalQuantity(int totalQuantity) {
 		this.totalQuantity = totalQuantity;
 	}
 
-	public String getTotalPrice() {
+	public int getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(String totalPrice) {
+	public void setTotalPrice(int totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
-	public String getItemMrp() {
+	public int getItemMrp() {
 		return itemMrp;
 	}
 
-	public void setItemMrp(String itemMrp) {
+	public void setItemMrp(int itemMrp) {
 		this.itemMrp = itemMrp;
 	}
 
-	public String getDiscountPrice() {
+	public int getDiscountPrice() {
 		return discountPrice;
 	}
 
-	public void setDiscountPrice(String discountPrice) {
+	public void setDiscountPrice(int discountPrice) {
 		this.discountPrice = discountPrice;
 	}
 
-	public String getRemainingQuantity() {
+	public int getRemainingQuantity() {
 		return remainingQuantity;
 	}
 
-	public void setRemainingQuantity(String remainingQuantity) {
+	public void setRemainingQuantity(int remainingQuantity) {
 		this.remainingQuantity = remainingQuantity;
 	}
 
-	public String getTotalSellQuantity() {
+	public int getTotalSellQuantity() {
 		return totalSellQuantity;
 	}
 
-	public void setTotalSellQuantity(String totalSellQuantity) {
+	public void setTotalSellQuantity(int totalSellQuantity) {
 		this.totalSellQuantity = totalSellQuantity;
 	}
 
-	public String getQuantitySellAmount() {
+	public int getQuantitySellAmount() {
 		return quantitySellAmount;
 	}
 
-	public void setQuantitySellAmount(String quantitySellAmount) {
+	public void setQuantitySellAmount(int quantitySellAmount) {
 		this.quantitySellAmount = quantitySellAmount;
 	}
 
