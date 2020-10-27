@@ -16,6 +16,9 @@ public class VegatableAppServerApplication {
 		SpringApplication.run(VegatableAppServerApplication.class, args);
 		System.out.println("Hello World!");
 		logger.info("main method ending");
+		
+		
+		
 	}
 
 }
